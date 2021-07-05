@@ -1,18 +1,39 @@
 <template>
-  <Car />
+  <CarComposition />
   <hr>
-  <Car2 />
+  <CarOptions />
+  <Car :potencia="potencia" :upPower="upPower" :downPower="downPower" />
 </template>
 
 <script>
-import Car from './components/CarComposition.vue'
-import Car2 from './components/CarOptions.vue'
+import { ref } from 'vue';
+import CarComposition from './components/CarComposition.vue';
+import CarOptions from './components/CarOptions.vue';
+import Car from './components/Car.vue';
 export default {
   components: {
-    Car,
-    Car2
-  }
-}
+    CarComposition,
+    CarOptions,
+    Car
+  },
+  setup() {
+    let potencia = ref(40);
+
+    const upPower = newPower => {
+      potencia.value = potencia.value + newPower;
+    };
+
+    const downPower = newPower => {
+      potencia.value = potencia.value - newPower;
+    };
+
+    return {
+      potencia,
+      upPower,
+      downPower
+    };
+  },
+};
 </script>
 
 <style>
